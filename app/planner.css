@@ -1,0 +1,728 @@
+/* ===== CSS IMPORTS ===== */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Share+Tech+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  /* Default Theme Variables */
+  --muted: #334155;
+  --text: #e5e7eb;
+  --sub: #f3f4f6;
+  --brand: #27272a;
+  --ok: #22c55e;
+  --warn: #f59e0b;
+  --border: #1f2937;
+  --btn-border: #3f3f46;
+  --btn-hover-border: #334155;
+  --btn-color: #c9d0da;
+  --btn-text: #080c11;
+  --dayCard-color: #f1f5f9;
+  --track-text: #080c11;
+  --num-color: #1e2d40;
+  --bg-gradient: radial-gradient(
+    circle at center,
+    rgba(124, 58, 237, 0.12) -90%,
+    #354153 61%,
+    rgb(15, 20, 30) 100%
+  );
+  --main-font: "Helvetica Now Display", sans-serif;
+}
+
+/* ===== BASE STYLES ===== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--main-font);
+  color: var(--text);
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* ===== LAYOUT STYLES ===== */
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+header h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* ===== COMPONENT STYLES ===== */
+
+/* Card Component */
+.card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: var(--sub);
+}
+
+.card .head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.card .head h2 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.card .body {
+  padding: 16px;
+}
+
+/* Button Component */
+.btn {
+  appearance: none;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-color);
+  color: var(--btn-text);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: var(--btn-hover-border);
+}
+
+.btn.icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#prevMonth, #nextMonth, #closeDayDetails {
+  background-color: transparent;
+  border: none;
+  color: var(--text);
+}
+
+/* Calendar Components */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.dow {
+  font-size: 12px;
+  color: var(--sub);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.day .row {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 3px !important;
+}
+
+.day {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 8px;
+  padding-top: 4px;
+  min-height: 68px;
+  background-color: var(--dayCard-color);
+  color: var(--num-color);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.day:hover {
+  outline: 2px solid #293241;
+}
+
+.day .dnum {
+  font-weight: 600;
+  font-size: 11px;
+  translate: -3px 0px;
+}
+
+.day .track {
+  right: 8px;
+  top: 8px;
+  font-size: 10px;
+  color: var(--track-text);
+  border-radius: 999px;
+  padding: 0px 6px;
+}
+
+.day.selected {
+  outline: 2px solid var(--text);
+}
+
+/* Progress Bar Components */
+.bar {
+  height: 6px;
+  background: var(--btn-color);
+  border: 1px solid #1e293b;
+  border-radius: 999px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+/* Default progress bar */
+.bar > span,
+.prog > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, rgb(59, 59, 59) 0%, #121212 100%);
+}
+
+/* Task Components */
+.task {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #3f3f46;
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--dayCard-color);
+}
+
+.task.done {
+  opacity: 0.65;
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.task label {
+  flex: 1;
+  line-height: 1.3;
+  color: var(--sub);
+  cursor: pointer;
+}
+
+.task .del {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.task .del:hover {
+  color: #e11d48;
+}
+
+.stack .task {
+  background-color: var(--brand);
+}
+
+.add-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Form Elements */
+input[type="text"],
+input[type="file"] {
+  background: var(--brand);
+  border: 1px solid var(--border);
+  color: var(--sub);
+  padding: 10px;
+  border-radius: 10px;
+  flex: 1;
+}
+
+/* Progress Components */
+.progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prog {
+  height: 10px;
+  background: var(--brand);
+  border: 1px solid #1e293b;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.prog > span {
+  display: block;
+  height: 100%;
+}
+
+/* Utility Classes */
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.right {
+  margin-left: auto;
+}
+
+small {
+  color: var(--sub);
+}
+
+.muted {
+  color: var(--sub);
+}
+
+.pill {
+  display: inline-block;
+  border-bottom: 1px solid #1e293b;
+  color: var(--text);
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+/* ===== SPECIAL COMPONENTS ===== */
+
+/* Reset Button */
+.buttonreset {
+  color: white;
+  background-color: #0b111a;
+  border-radius: 10px;
+  font-size: 1rem;
+  padding: 8px 17px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #3f3f46;
+}
+
+.buttonreset:hover {
+  background-color: #333;
+}
+
+.buttonreset svg {
+  display: inline;
+  width: 1.3rem;
+  height: 1.2rem;
+  margin-right: 0.5rem;
+  color: var(--btn-color);
+}
+
+.buttonreset:focus svg {
+  animation: spin_357 0.5s linear;
+}
+
+/* Dropdown Menus */
+#dropdownMenu,
+#dropdownMenu2 {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: var(--text);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+#dropdownMenu li,
+#dropdownMenu2 li {
+  color: var(--text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#dropdownMenu2 li:hover,
+#dropdownMenu li:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Drawer Components */
+#drawer .btn,
+#drawer #resetBtn,
+#drawer #resetBtn2,
+.buttonreset svg {
+  background-color: transparent;
+  color: var(--text);
+  border: none;
+}
+
+#drawer {
+  background-color: var(--brand);
+  display: none;
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+.hamburger,
+.row2 {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  #overlay {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header .row {
+    display: none !important;
+  }
+
+  header .row2 {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #drawer {
+    display: block;
+  }
+  #overlay {
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hamburger {
+    display: block !important;
+  }
+}
+
+/* ===== ENHANCED HEATMAP STYLES ===== */
+
+/* Heatmap Section */
+.heatmap-section {
+  margin-top: 2rem;
+}
+
+/* Heatmap Container */
+.heatmap-container {
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+/* Months Row */
+.months-row {
+  display: grid;
+  grid-template-columns: repeat(53, 14px);
+  grid-gap: 3px;
+  font-size: 11px;
+  color: var(--muted);
+  margin-left: 50px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.months-row .month-label, .day-labels span {
+  grid-column: span 4;
+  text-align: left;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+/* Heatmap Grid Container */
+.heatmap-grid-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* Day Labels */
+.day-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  height: 105px;
+  margin-top: 14px;
+  font-weight: 500;
+  width: 35px;
+}
+
+/* Heatmap Graph */
+.heatmap-graph {
+  display: grid;
+  grid-template-rows: repeat(7, 14px);
+  grid-auto-flow: column;
+  grid-auto-columns: 14px;
+  grid-gap: 3px;
+}
+
+/* Contribution Boxes */
+.contrib-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.contrib-box:hover {
+  transform: scale(1.1);
+  border-color: var(--text);
+  z-index: 10;
+}
+
+/* Heatmap Legend */
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.legend-text {
+  margin: 0 6px;
+  font-weight: 500;
+}
+
+.legend-boxes {
+  display: flex;
+  gap: 3px;
+}
+
+.legend-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  cursor: help;
+}
+
+/* Tooltip */
+.heatmap-tooltip {
+  position: absolute;
+  z-index: 1000;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.tooltip-content {
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+/* Day Details Section */
+#dayDetails {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+#dayDetails:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.day-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.day-summary {
+  background: var(--brand);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.tasks-overview {
+  background: var(--brand);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.completion-ring {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px;
+  position: relative;
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.task-item.completed {
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+
+.task-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: white;
+}
+
+.task-icon.completed {
+  background: var(--ok);
+}
+
+.task-icon.pending {
+  background: var(--muted);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .heatmap-container {
+    padding: 0.5rem 0;
+  }
+
+  .months-row {
+    grid-template-columns: repeat(53, 12px);
+    margin-left: 40px;
+    font-size: 10px;
+  }
+
+  .day-labels {
+    font-size: 10px;
+    width: 30px;
+    height: 90px;
+  }
+
+  .heatmap-graph {
+    grid-template-rows: repeat(7, 12px);
+    grid-auto-columns: 12px;
+  }
+
+  .contrib-box {
+    width: 12px;
+    height: 12px;
+  }
+
+  .day-details-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .heatmap-legend {
+    justify-content: center;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .months-row {
+    margin-left: 45px;
+  }
+
+  .day-labels {
+    width: 40px;
+    height: 98px;
+  }
+
+  .heatmap-graph {
+    grid-template-rows: repeat(7, 13px);
+    grid-auto-columns: 13px;
+  }
+
+  .contrib-box {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+/* Year Navigation */
+#yearNavigation {
+  transition: all 0.3s ease;
+}
+
+#yearNavigation:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Select Styling */
+#yearSelector {
+  background: var(--btn-color);
+  border: 1px solid var(--btn-border);
+  color: var(--btn-text);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#yearSelector:hover {
+  border-color: var(--btn-hover-border);
+}
+
+/* Info Button */
+#heatmapInfo {
+  transition: all 0.2s ease;
+}
+
+#heatmapInfo:hover {
+  transform: scale(1.05);
+}
+
+.Contribution {
+  background-color: transparent;
+  border: none;
+}
+.notes-body{
+  background-color: var(--brand);
+}
+.notes-head *{
+  color: var(--text);
+}

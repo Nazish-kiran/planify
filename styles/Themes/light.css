@@ -1,0 +1,52 @@
+:root[data-theme="light"] {
+  --muted: #9ca3af;
+  --text: #374151;
+  --sub: #374151;
+  --brand: #ffffff;
+  --ok: #059669;
+  --warn: #d97706;
+  --border: #e5e7eb;
+  --btn-border: #9ca3af;
+  --btn-hover-border: #374151;
+  --btn-color: #ffffff;
+  --btn-text: #1f2937;
+  --track-text: #0d121d;
+  --dayCard-color: #ffffff;
+  --bg-gradient: radial-gradient(
+    circle at 50% 30%,
+    #f9fafb 0%,
+    #e5e7eb 70%,
+    #d1d5db 100%
+  );
+  --main-font: "Helvetica Now Display", sans-serif;
+}
+
+:root[data-theme="light"] .bar > span,
+:root[data-theme="light"] .prog > span {
+  background: linear-gradient(90deg, rgb(59, 59, 59) 0%, #121212 100%);
+}
+
+:root[data-theme="light"] .level-0 {
+  background-color: #ebedf0;
+  border: 1px solid #d1d5da;
+}
+
+:root[data-theme="light"] .level-1 {
+  background-color: #9be9a8;
+}
+
+:root[data-theme="light"] .level-2 {
+  background-color: #40c463;
+}
+
+:root[data-theme="light"] .level-3 {
+  background-color: #30a14e;
+}
+
+:root[data-theme="light"] .level-4 {
+  background-color: #216e39;
+}
+
+[data-theme="light"] .buttonreset svg {
+  color: #fff !important;
+}

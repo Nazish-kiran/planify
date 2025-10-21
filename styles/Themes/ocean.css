@@ -1,0 +1,47 @@
+:root[data-theme="ocean"] {
+  --muted: #334155;
+  --text: #f3f4f6;
+  --sub: #f3f4f6;
+  --brand: #27272a;
+  --ok: #22c55e;
+  --warn: #f59e0b;
+  --border: #1f2937;
+  --btn-border: #3f3f46;
+  --btn-hover-border: #334155;
+  --btn-color: #c9d0da;
+  --track-text: #27272a;
+  --dayCard-color: #f1f5f9;
+  --bg-gradient: radial-gradient(
+    circle at center,
+    rgba(124, 58, 237, 0.12) -90%,
+    #354153 61%,
+    rgb(7, 9, 14) 100%
+  );
+  --main-font: "Helvetica Now Display", sans-serif;
+}
+
+:root[data-theme="ocean"] .bar > span,
+:root[data-theme="ocean"] .prog > span {
+  background: linear-gradient(90deg, #047481 0%, #065f73 100%);
+}
+
+:root[data-theme="ocean"] .level-0 {
+  background-color: #0f172a;
+  border: 1px solid #1e293b;
+}
+
+:root[data-theme="ocean"] .level-1 {
+  background-color: #164e63;
+}
+
+:root[data-theme="ocean"] .level-2 {
+  background-color: #0891b2;
+}
+
+:root[data-theme="ocean"] .level-3 {
+  background-color: #0ea5e9;
+}
+
+:root[data-theme="ocean"] .level-4 {
+  background-color: #38bdf8;
+}

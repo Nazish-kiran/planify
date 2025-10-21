@@ -1,0 +1,43 @@
+:root[data-theme="royal"] {
+  --muted: #b8860b;
+  --text: #c5a02e;
+  --sub: #0a3d62;
+  --brand: #e6d9b6;
+  --ok: #10b981;
+  --warn: #f59e0b;
+  --border: #fbbf24;
+  --btn-border: #d4af37;
+  --btn-hover-border: #fde68a;
+  --btn-color: #e6d9b6;
+  --btn-text: #0a3d62;
+  --dayCard-color: #041e42;
+  --track-text: #ffffff;
+  --bg-gradient: #f8f5f0;
+  --main-font: "Playfair Display", serif;
+}
+
+:root[data-theme="royal"] .bar > span,
+:root[data-theme="royal"] .prog > span {
+  background: #d4af37;
+}
+
+:root[data-theme="royal"] .level-0 {
+  background-color: #1e1b4b;
+  border: 1px solid #312e81;
+}
+
+:root[data-theme="royal"] .level-1 {
+  background-color: #7c3aed;
+}
+
+:root[data-theme="royal"] .level-2 {
+  background-color: #8b5cf6;
+}
+
+:root[data-theme="royal"] .level-3 {
+  background-color: #a78bfa;
+}
+
+:root[data-theme="royal"] .level-4 {
+  background-color: #c4b5fd;
+}

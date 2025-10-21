@@ -1,0 +1,98 @@
+:root[data-theme="sunset"] {
+  --muted: #ff7e42;
+  --text: #ffd166;
+  --sub: #ffd166;
+  --brand: #df312d;
+  --ok: #2dd4bf;
+  --warn: #e1453b;
+  --border: #ff7e42;
+  --btn-border: #df312d;
+  --btn-hover-border: #f97316;
+  --btn-color: #fff8e7;
+  --btn-text: #7c2d12;
+  --dayCard-color: #7c2d12;
+  --track-text: #ffe8b3;
+  --num-color: #ffd97a;
+  --bg-gradient: radial-gradient(
+    circle at 50% 30%,
+    #ffb347 0%,
+    #ff7e42 30%,
+    #df312d 65%,
+    #431407 100%
+  );
+  --main-font: "Helvetica Now Display", "Georgia", serif;
+}
+
+[data-theme="sunset"] body {
+  background: var(--bg-gradient);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--main-font);
+  line-height: 1.6;
+}
+
+[data-theme="sunset"] h1,
+[data-theme="sunset"] h2,
+[data-theme="sunset"] h3 {
+  color: var(--sub);
+  font-weight: 700;
+  text-shadow: 0 2px 6px rgba(67, 20, 7, 0.6);
+}
+
+[data-theme="sunset"] .card {
+  background: var(--dayCard-color);
+  border: 1px solid var(--btn-border);
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(67, 20, 7, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="sunset"] .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(67, 20, 7, 0.8);
+}
+
+[data-theme="sunset"] .btn {
+  background: var(--btn-color);
+  border: 1px solid var(--btn-border);
+  color: var(--btn-text);
+  transition: all 0.25s ease-in-out;
+}
+
+[data-theme="sunset"] .btn:hover {
+  border-color: var(--btn-hover-border);
+  background: var(--btn-hover-border);
+  color: #fff;
+}
+
+[data-theme="sunset"] .day.selected {
+  outline: 2px solid #3b82f6;
+}
+
+:root[data-theme="sunset"] .bar > span,
+:root[data-theme="sunset"] .prog > span {
+  background: linear-gradient(90deg, #3b82f6 0%, #2a78f7 100%);
+}
+
+:root[data-theme="sunset"] .level-0 {
+  background-color: #431407;
+  border: 1px solid #7c2d12;
+}
+
+:root[data-theme="sunset"] .level-1 {
+  background-color: #c2410c;
+}
+
+:root[data-theme="sunset"] .level-2 {
+  background-color: #ea580c;
+}
+
+:root[data-theme="sunset"] .level-3 {
+  background-color: #f97316;
+}
+
+:root[data-theme="sunset"] .level-4 {
+  background-color: #fb923c;
+}

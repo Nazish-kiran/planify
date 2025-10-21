@@ -1,0 +1,94 @@
+:root[data-theme="cyber"] {
+  --muted: #00cc66;
+  --text: #66ffbf;
+  --sub: #66ffbf;
+  --brand: #0a0a0a;
+  --ok: #00ff88;
+  --warn: #d4ff00;
+  --border: #1a1a1a;
+  --btn-border: #00ff88;
+  --btn-hover-border: #00ffaa;
+  --btn-color: #0a0a0a;
+  --btn-text: #00ff88;
+  --dayCard-color: #111111;
+  --track-text: #00ff88;
+  --num-color: #bbb8b8;
+  --bg-gradient: radial-gradient(
+    circle at center,
+    rgba(0, 255, 136, 0.12) -30%,
+    #121212 60%,
+    #000000 100%
+  );
+  --glow: 0 0 4px rgba(0, 255, 136, 0.6), 0 0 8px rgba(0, 255, 136, 0.4),
+    0 0 12px rgba(0, 255, 136, 0.3);
+}
+
+[data-theme="cyber"] body {
+  background: var(--bg-gradient);
+  color: var(--text);
+  font-family: "Orbitron", "Share Tech Mono", monospace;
+  letter-spacing: 0.5px;
+}
+
+[data-theme="cyber"] h1,
+[data-theme="cyber"] h2,
+[data-theme="cyber"] h3 {
+  color: var(--ok);
+  text-shadow: var(--glow);
+}
+
+[data-theme="cyber"] .card {
+  background: var(--dayCard-color);
+  border: 1px solid var(--btn-border);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+[data-theme="cyber"] .card:hover {
+  box-shadow: var(--glow);
+}
+
+[data-theme="cyber"] .btn {
+  background: var(--btn-color);
+  border: 1px solid var(--btn-border);
+  color: var(--btn-text);
+  text-shadow: 0 0 6px rgba(0, 255, 136, 0.7);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+  transition: all 0.25s ease-in-out;
+}
+
+[data-theme="cyber"] .btn:hover {
+  border-color: var(--btn-hover-border);
+  box-shadow: var(--glow);
+  color: var(--btn-hover-border);
+}
+
+:root[data-theme="cyber"] .bar > span,
+:root[data-theme="cyber"] .prog > span {
+  background: linear-gradient(90deg, #00ff88 0%, #00cc66 100%);
+}
+
+:root[data-theme="cyber"] .level-0 {
+  background-color: #000000;
+  border: 1px solid #1a1a1a;
+}
+
+:root[data-theme="cyber"] .level-1 {
+  background-color: #003d19;
+  box-shadow: 0 0 4px rgba(0, 255, 136, 0.3);
+}
+
+:root[data-theme="cyber"] .level-2 {
+  background-color: #00cc66;
+  box-shadow: 0 0 6px rgba(0, 255, 136, 0.4);
+}
+
+:root[data-theme="cyber"] .level-3 {
+  background-color: #00ff88;
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+}
+
+:root[data-theme="cyber"] .level-4 {
+  background-color: #66ffbf;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+}

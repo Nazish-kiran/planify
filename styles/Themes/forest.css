@@ -1,0 +1,48 @@
+:root[data-theme="forest"] {
+  --muted: #6b8f71;
+  --text: #e6f0e6;
+  --sub: #e6f0e6;
+  --brand: #3e5c49;
+  --ok: #6b8f71;
+  --warn: #c98f46;
+  --border: #4a6b55;
+  --btn-border: #6b8f71;
+  --btn-hover-border: #7fa582;
+  --btn-color: #f1f8f2;
+  --dayCard-color: #2f4637;
+  --track-text: #f7f9f8;
+  --num-color: #ffffff;
+  --bg-gradient: radial-gradient(
+    circle at center,
+    rgba(107, 143, 113, 0.1) -90%,
+    #3e5c49 61%,
+    #2f4637 100%
+  );
+  --main-font: "Nunito", sans-serif;
+}
+
+:root[data-theme="forest"] .bar > span,
+:root[data-theme="forest"] .prog > span {
+  background: linear-gradient(90deg, #065f46 0%, #047857 100%);
+}
+
+:root[data-theme="forest"] .level-0 {
+  background-color: #1f2937;
+  border: 1px solid #374151;
+}
+
+:root[data-theme="forest"] .level-1 {
+  background-color: #14532d;
+}
+
+:root[data-theme="forest"] .level-2 {
+  background-color: #166534;
+}
+
+:root[data-theme="forest"] .level-3 {
+  background-color: #16a34a;
+}
+
+:root[data-theme="forest"] .level-4 {
+  background-color: #22c55e;
+}

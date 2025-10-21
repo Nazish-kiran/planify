@@ -1,0 +1,48 @@
+:root[data-theme="dark"] {
+  --muted: #6b7280;
+  --text: #f3f4f6;
+  --sub: #f3f4f6;
+  --brand: #131820;
+  --ok: #10b981;
+  --warn: #f59e0b;
+  --border: #374151;
+  --btn-border: #4b5563;
+  --btn-hover-border: #6366f1;
+  --btn-color: #f3f4f6;
+  --btn-text: #1f2937;
+  --dayCard-color: #131820;
+  --track-text: #f9fafb;
+  --bg-gradient: radial-gradient(
+    circle at 50% 30%,
+    #2e2e2e 0%,
+    #1a1a1a 70%,
+    #000000 100%
+  );
+  --main-font: "Helvetica Now Display", sans-serif;
+}
+
+:root[data-theme="dark"] .bar > span,
+:root[data-theme="dark"] .prog > span {
+  background: linear-gradient(90deg, #84888b 0%, #bfc1c7 100%);
+}
+
+:root[data-theme="dark"] .level-0 {
+  background-color: #161b22;
+  border: 1px solid #21262d;
+}
+
+:root[data-theme="dark"] .level-1 {
+  background-color: #0e4429;
+}
+
+:root[data-theme="dark"] .level-2 {
+  background-color: #006d32;
+}
+
+:root[data-theme="dark"] .level-3 {
+  background-color: #26a641;
+}
+
+:root[data-theme="dark"] .level-4 {
+  background-color: #39d353;
+}
