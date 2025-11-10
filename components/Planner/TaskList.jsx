@@ -345,7 +345,7 @@ export default function TaskList({ selectedDate, onProgressUpdate }) {
           })}
         </h2>
         <div className="row">
-             <Notes/>
+             <Notes date={selectedDate}/>
           <button id="completeAll" className="btn" onClick={handleCompleteAll}>
             Complete all
           </button>

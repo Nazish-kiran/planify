@@ -1,17 +1,11 @@
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
-import "./planner.css";
 import './globals.css'
-import '../styles/Themes/dark.css'
-import '../styles/Themes/light.css' 
-import '../styles/Themes/ocean.css'
-import '../styles/Themes/forest.css'
-import '../styles/Themes/sunset.css'
-import '../styles/Themes/royal.css'
-import '../styles/Themes/cyber.css'
+
 
 export const metadata = {
-  title: "Planify",
-  description: "Create Your Own Customised Planner",
+   title: 'PLANZIO AI – Plan Your Life with AI',
+  description: 'Turn your goals, routines, and ambitions into actionable plans with AI-powered planners.',
+
 };
 
 export default function RootLayout({ children }) {

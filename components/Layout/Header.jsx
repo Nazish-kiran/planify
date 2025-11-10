@@ -146,7 +146,7 @@ export default function Header() {
               </div>
             )}
           </div>
-          <Notes/>
+          <Notes date={new Date()}/>
           <button className="btn icon" onClick={handleExport}>
             Export
           </button>
@@ -193,7 +193,7 @@ export default function Header() {
 
         {/* Theme Dropdown for Desktop */}
         <ThemeDropdown />
-        <Notes/>
+        <Notes date={new Date()}/>
 
         <button className="btn icon" onClick={handleExport}>
           Export
