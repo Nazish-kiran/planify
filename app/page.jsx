@@ -1,39 +1,77 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
+import { motion, useInView, useAnimation } from "framer-motion";
+
+import "./home.css";
+import Marquee from "@/components/Home/Marquee";
+import Navbar from "@/components/Home/Navbar";
+import DividerBtn from "@/components/ui/DividerBtn";
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false });
 
-  useEffect(() => {
-    // Background video slow zoom animation is handled by Tailwind
-    const sliderInterval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === 0 ? 1 : 0));
-    }, 5000);
-    return () => clearInterval(sliderInterval);
-  }, []);
-  const handleSwipe = () => {
-    // Handle swipe to features
-    window.location.href = "/features";
+  const text = `Planzio AI is your intelligent assistant that helps you stay organized, set meaningful goals, and create adaptive plans tailored to your lifestyle, empowering you to achieve success efficiently.`;
+  const AnimatedText = ({ text }) => {
+    const controls = useAnimation();
+    const ref = useRef(null);
+    const [scrollDir, setScrollDir] = useState("down"); // track scroll direction
+
+    useEffect(() => {
+      let lastScrollY = window.scrollY;
+
+      const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        setScrollDir(currentScrollY > lastScrollY ? "down" : "up");
+        lastScrollY = currentScrollY;
+      };
+
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && scrollDir === "down") {
+            controls.start((i) => ({
+              opacity: 1,
+              y: 0,
+              transition: { delay: i * 0.01, duration: 0.9 },
+            }));
+          } else if (!entry.isIntersecting) {
+            controls.start({ opacity: 0, y: 20 }); // reset when out of view
+          }
+        },
+        { threshold: 0.1 } // trigger when 10% visible
+      );
+
+      if (ref.current) observer.observe(ref.current);
+      return () => ref.current && observer.unobserve(ref.current);
+    }, [controls, scrollDir]);
+
+    return (
+      <p
+        ref={ref}
+        className="text-5xl leading-[55px] font-light font-[manrope] text-center mb-5 text-white"
+      >
+        {text.split(" ").map((word, index) => (
+          <motion.span key={index} custom={index} animate={controls}>
+            {word}{" "}
+          </motion.span>
+        ))}
+      </p>
+    );
   };
-
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/features", label: "Features" },
-    { href: "/themes", label: "Themes" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/planner", label: "Planner" },
-    { href: "/contact", label: "Contact" },
-    { href: "/about", label: "About" },
-  ];
 
   return (
     <>
-      <div className="bg-[#060606] text-white">
+      <div className="bg-[#060606] text-white font-[manrope]">
         <Head>
-          <title>PLANZIO AI – Plan Your Life with AI</title>
+          <title>PLANZIO AI - Plan Your Life with AI</title>
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
@@ -41,157 +79,55 @@ export default function Home() {
         </Head>
 
         {/* Navbar */}
-        <nav className="">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 transition-transform duration-300 hover:scale-102">
-              <img
-                src="/planzio.png"
-                alt="Planify Logo"
-                className="h-10 w-10 rounded-full shadow-lg shadow-white/20"
-              />
-              <span className="text-xl font-semibold text-white text-shadow shadow-white/30">
-                PLANZIO AI
-              </span>
-            </div>
-
-            <ul
-              className={`flex flex-col md:flex-row items-center gap-6 md:gap-8 transition-all duration-300 ${
-                isMenuOpen ? "flex" : "hidden md:flex"
-              }`}
-            >
-              {navLinks.map(({ href, label }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    className="text-gray-700 font-medium transition-colors duration-300 hover:text-black hover:underline underline-offset-4"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex items-center gap-4">
-              <Link
-                href="/features"
-                className="hidden md:block bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-900 transition"
-              >
-                Get Started
-              </Link>
-              <button
-                className="flex flex-col gap-1 cursor-pointer md:hidden"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                <span
-                  className={`w-6 h-0.5 bg-white rounded transition-all duration-300 ${
-                    isMenuOpen ? "transform translate-y-1.5 rotate-45" : ""
-                  }`}
-                ></span>
-                <span
-                  className={`w-6 h-0.5 bg-white rounded transition-all duration-300 ${
-                    isMenuOpen ? "opacity-0" : ""
-                  }`}
-                ></span>
-                <span
-                  className={`w-6 h-0.5 bg-white rounded transition-all duration-300 ${
-                    isMenuOpen ? "transform -translate-y-1.5 -rotate-45" : ""
-                  }`}
-                ></span>
-              </button>
-            </div>
-          </div>
-        </nav>
+        <Navbar />
 
         {/* Hero Section */}
         <section
-          className="min-h-screen flex items-center justify-start px-20 relative bg-no-repeat "
+          className="relative bg-no-repeat pt-72"
           style={{
             backgroundImage: 'url("/images/hero-bg-shape.png")',
             backgroundPosition: "top center",
           }}
         >
-          <div className="max-w-2xl animate-fade-in-up">
-            <span className="bg-white/15 border border-white/20 px-4 py-1.5 rounded-full text-sm inline-block mb-5">
-              ORGANIZE YOUR LIFE SMARTLY
-            </span>
-            <h1 className="text-5xl font-bold leading-tight mb-5">
-              Plan Your Life with
-              <br />
-              AI-Powered Planners
+          <div className="max-w-3xl m-auto">
+            <h1 className="m-auto text-7xl text-center font-[600] leading-[60px] mb-5 font-[manrope]">
+              Plan Your Life with{" "}
+              <span className=" bg-gradient-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] bg-clip-text text-transparent">
+                AI-Powered Planners
+              </span>
             </h1>
-            <p className="text-lg font-light mb-10 text-gray-300">
+            <p className="text-md text-center mb-10 text-[#a7aabb] font-[manrope]">
               Turn your goals, routines, and ambitions into actionable plans
               with AI. Whether it&apos;s studies, business, or personal growth —
               Planify helps you stay ahead.
             </p>
-            <div className="flex gap-5">
-              <a href="#" className="btn-glow text-base px-10 py-4">
-                Get Started – Free
-              </a>
-              <a href="#" className="btn-outline text-base px-10 py-4">
+            <div className="flex gap-6 justify-center">
+              <Link
+                href="#"
+                className="secondary-btn relative border-[#A93E17] border-1 rounded-[100px] font-semibold px-8  py-3 font-[manrope] bg-black"
+              >
+                Get Started - Free
+              </Link>
+              <Link
+                href="#"
+                className="primary-btn bg-gradient-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] font-semibold px-6 py-3 font-[manrope] rounded-[100px]"
+              >
                 View Pricing
-              </a>
+              </Link>
             </div>
           </div>
+          <h4 className="text-center font-[manrope] mt-20 text-xl text-[#a7aabb]">
+            Lastest Updates From{" "}
+            <span className=" text-[#A93E17]  "> Planzio</span>{" "}
+          </h4>
+          <Marquee />
         </section>
 
         {/* About Planner Section */}
-        <section className="py-24 bg-white/5 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-5 flex items-center gap-16">
-            <div className="flex-1">
-              <h2 className="text-4xl mb-8 text-gradient">
-                Your AI-Powered Life Planner
-              </h2>
-              <p className="text-lg leading-relaxed mb-5 text-white/90">
-                PLANZIO AI is not just another planner – it&apos;s your personal
-                AI assistant that helps you organize your life, set goals, and
-                achieve them with smart planning. Our advanced AI technology
-                understands your needs and creates personalized plans that adapt
-                to your lifestyle.
-              </p>
-              <p className="text-lg leading-relaxed text-white/90">
-                Whether you&apos;re a student aiming for academic excellence, a
-                professional building your career, or an entrepreneur growing
-                your business, PLANZIO AI is designed to help you succeed.
-              </p>
-            </div>
-            <div className="flex-1 p-5">
-              <div className="relative w-full overflow-hidden rounded-2xl">
-                <div
-                  className="flex w-[200%] transition-transform duration-500 ease-in-out"
-                  style={{ transform: `translateX(-${currentSlide * 50}%)` }}
-                >
-                  <img
-                    src="/Black Modern Gradient Programmer Presentation.png"
-                    alt="Planner Preview 1"
-                    className="w-1/2 h-80 object-cover rounded-2xl shadow-2xl border border-white/10"
-                  />
-                  <img
-                    src="/black.png"
-                    alt="Planner Preview 2"
-                    className="w-1/2 h-80 object-cover rounded-2xl shadow-2xl border border-white/10"
-                  />
-                </div>
-                <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex gap-2.5 z-10">
-                  <button
-                    className={`w-3 h-3 rounded-full border-2 border-white/80 transition-all duration-300 ${
-                      currentSlide === 0
-                        ? "bg-white/80 scale-120"
-                        : "bg-transparent"
-                    }`}
-                    onClick={() => setCurrentSlide(0)}
-                  ></button>
-                  <button
-                    className={`w-3 h-3 rounded-full border-2 border-white/80 transition-all duration-300 ${
-                      currentSlide === 1
-                        ? "bg-white/80 scale-120"
-                        : "bg-transparent"
-                    }`}
-                    onClick={() => setCurrentSlide(1)}
-                  ></button>
-                </div>
-              </div>
-            </div>
+        <section className="py-24">
+          <div className="max-w-6xl mx-auto w-full text-center px-5 gap-16">
+            <DividerBtn label="about us"/>
+            <AnimatedText text={text} />
           </div>
         </section>
 
@@ -313,21 +249,6 @@ export default function Home() {
               </div>
             </div>
           ))}
-        </section>
-
-        {/* Swipe Button Section */}
-        <section className="py-16 flex justify-center items-center">
-          <div
-            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-full w-72 h-16 relative cursor-pointer transition-all duration-300 hover:bg-white/15 hover:scale-102 overflow-hidden"
-            onClick={handleSwipe}
-          >
-            <div className="absolute left-0 top-0 w-16 h-16 bg-white/20 rounded-full flex items-center justify-center cursor-grab transition-all duration-300 active:bg-white/30 active:cursor-grabbing">
-              <span className="text-white text-xl">→</span>
-            </div>
-            <div className="absolute w-full text-center text-white/80 text-lg font-medium pointer-events-none transition-opacity duration-300">
-              Swipe to Features
-            </div>
-          </div>
         </section>
 
         {/* Footer */}

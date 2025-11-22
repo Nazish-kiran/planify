@@ -1,0 +1,39 @@
+
+.primary-btn {
+  background-size: 200% auto;
+  transition: all 0.4s ease-in-out;
+  position: relative;
+
+}
+.primary-btn:hover {
+  background-position: right center;
+}
+.secondary-btn{
+    z-index: 2;
+    overflow: hidden;
+}
+.secondary-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -10%;
+  right: 0;
+  background-color: #a93e17;
+  display: block;
+  width: 0;
+  height: 106%;
+  transition: all 0.4s ease-in-out;
+  z-index: -1;
+  transform: skew(45deg);
+}
+
+.secondary-btn:hover::after {
+  left: 0%;
+  width: 100%;
+  height: 106%;
+  transition: all 0.4s ease-in-out;
+  z-index: -1;
+  transform: skew(0);
+
+}

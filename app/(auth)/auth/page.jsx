@@ -22,7 +22,7 @@ export default function AuthPage() {
       });
 
       if (res.ok) {
-        window.location.href = "/planner";
+        window.location.href = "/Form";
       } else {
         const data = await res.json();
         setError(data.message || "Invalid email or password");
