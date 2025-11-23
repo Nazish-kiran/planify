@@ -4,17 +4,45 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useInView, useAnimation } from "framer-motion";
-
 import "./home.css";
 import Marquee from "@/components/Home/Marquee";
 import Navbar from "@/components/Home/Navbar";
 import DividerBtn from "@/components/ui/DividerBtn";
+import StatsCard from "@/components/Home/StatsCard";
 
 export default function Home() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false });
 
   const text = `Planzio AI is your intelligent assistant that helps you stay organized, set meaningful goals, and create adaptive plans tailored to your lifestyle, empowering you to achieve success efficiently.`;
+
+  const stats = [
+    {
+      title: "Integrated Tasks Processed",
+      number: "298+",
+      iconSrc: "/images/icon-about-item-1.svg",
+      bottomImageSrc: "/images/about-item-image-1.png",
+    },
+    {
+      title: "Students Benefiting",
+      number: "978+",
+      iconSrc: "/images/icon-about-item-2.svg",
+      bottomImageSrc: "/images/about-item-image-2.png",
+    },
+    {
+      title: "Handled by AI Bots",
+      number: "300%",
+      iconSrc: "/images/icon-about-item-3.svg",
+      bottomImageSrc: "/images/about-item-image-3.png",
+    },
+    {
+      title: "Efficiency Improvement",
+      number: "95X",
+      iconSrc: "/images/icon-about-item-4.svg",
+      bottomImageSrc: "/images/about-item-image-4.png",
+    },
+  ];
+
   const AnimatedText = ({ text }) => {
     const controls = useAnimation();
     const ref = useRef(null);
@@ -126,11 +154,21 @@ export default function Home() {
         {/* About Planner Section */}
         <section className="py-24">
           <div className="max-w-6xl mx-auto w-full text-center px-5 gap-16">
-            <DividerBtn label="about us"/>
+            <DividerBtn label="about us" />
             <AnimatedText text={text} />
           </div>
         </section>
-
+        <div className="flex flex-wrap px-10 w-full">
+          {stats.map((item, index) => (
+            <StatsCard
+              key={index}
+              title={item.title}
+              number={item.number}
+              iconSrc={item.iconSrc}
+              bottomImageSrc={item.bottomImageSrc}
+            />
+          ))}
+        </div>
         {/* Target Audience Section */}
         <section className="py-24 text-center">
           <h2 className="text-4xl mb-12 text-gradient">Who Can Benefit?</h2>
