@@ -158,7 +158,7 @@ export default function Home() {
             <AnimatedText text={text} />
           </div>
         </section>
-        <div className="flex flex-wrap px-10 w-full">
+        <div className="flex flex-wrap px-10 w-full mb-30">
           {stats.map((item, index) => (
             <StatsCard
               key={index}
@@ -169,9 +169,16 @@ export default function Home() {
             />
           ))}
         </div>
+
         {/* Target Audience Section */}
-        <section className="py-24 text-center">
-          <h2 className="text-4xl mb-12 text-gradient">Who Can Benefit?</h2>
+        <section className="text-center">
+          <DividerBtn label="who can benefit" />
+          <h2 className="text-9xl mb-12 text-gradient">
+            AI That Works for Everyone, Driving <br /> the {" "}
+            <span className=" bg-gradient-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] bg-clip-text text-transparent">
+            Future Forward
+            </span>
+          </h2>
           <div className="max-w-6xl mx-auto px-5 flex justify-center gap-8 flex-wrap">
             {[
               {

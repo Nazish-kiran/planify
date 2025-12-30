@@ -726,3 +726,7 @@ small {
 .notes-head *{
   color: var(--text);
 }
+.study-item:hover {
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+}

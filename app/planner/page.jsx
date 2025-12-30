@@ -14,6 +14,7 @@ import "../../styles/Themes/forest.css";
 import "../../styles/Themes/sunset.css";
 import "../../styles/Themes/royal.css";
 import "../../styles/Themes/cyber.css";
+import StudyResources from "@/components/Planner/StudyResources";
 
 export default function Home() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -42,8 +43,8 @@ export default function Home() {
             onProgressUpdate={handleProgressUpdate}
           />
         </div>
-
         <Sidebar progressData={progressData} />
+        {/* <StudyResources /> */}
       </div>
 
       <Heatmap progressData={progressData} />

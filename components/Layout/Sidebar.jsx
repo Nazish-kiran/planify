@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import StudyResources from "../Planner/StudyResources";
+import GitHubProjects from "../Planner/GithubProfileShowcase";
 
 export default function Sidebar({ progressData }) {
   const [openAccordion, setOpenAccordion] = useState("weeklyRhythm");
@@ -45,6 +47,8 @@ export default function Sidebar({ progressData }) {
           </small>
         </div>
       </div>
+      <GitHubProjects/>
+      <StudyResources/>
 
       {/* Guide Card */}
       <div className="card" style={{ marginTop: "16px" }}>
