@@ -1,7 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FiUser, FiFolder, FiStar, FiGitBranch, FiExternalLink, FiPlus, FiTrash2, FiCheck, FiSearch } from "react-icons/fi";
+import {
+  FiUser,
+  FiFolder,
+  FiStar,
+  FiGitBranch,
+  FiExternalLink,
+  FiPlus,
+  FiTrash2,
+  FiCheck,
+  FiSearch,
+} from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
 
 const GH_LAST_KEY = "gh_last_user_v1";
@@ -32,12 +42,16 @@ export default function GitHubProjects() {
       setProfile(null);
       setRepos([]);
 
-      const userRes = await fetch(`https://api.github.com/users/${encodeURIComponent(u)}`);
+      const userRes = await fetch(
+        `https://api.github.com/users/${encodeURIComponent(u)}`
+      );
       if (!userRes.ok) throw new Error();
       const user = await userRes.json();
 
       const reposRes = await fetch(
-        `https://api.github.com/users/${encodeURIComponent(u)}/repos?per_page=100&sort=updated`
+        `https://api.github.com/users/${encodeURIComponent(
+          u
+        )}/repos?per_page=100&sort=updated`
       );
       const repoData = reposRes.ok ? await reposRes.json() : [];
 
@@ -94,60 +108,61 @@ export default function GitHubProjects() {
               <FaGithub className="w-6 h-6 text-gray-700" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-800">GitHub & Projects</h2>
-              <p className="text-sm text-gray-500 mb-2">Explore profiles and track personal projects</p>
+              <h2 className="text-xl font-bold ">GitHub & Projects</h2>
+              <p className="text-sm mb-2">
+                Explore profiles and track personal projects
+              </p>
             </div>
           </div>
-          
         </div>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            {/* Tabs */}
-            <div className="flex rounded-lg bg-gray-100 p-1 mb-3">
-              <button
-                className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  tab === "profile" 
-                    ? "bg-white text-gray-800 shadow-sm" 
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-                onClick={() => setTab("profile")}
-              >
-                <FiUser className="w-4 h-4" />
-                Profile
-              </button>
-              <button
-                className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  tab === "projects" 
-                    ? "bg-white text-gray-800 shadow-sm" 
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-                onClick={() => setTab("projects")}
-              >
-                <FiFolder className="w-4 h-4" />
-                Projects
-              </button>
-            </div>
-
-            {/* Search Input */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          {/* Tabs */}
+          <div className="flex rounded-lg bg-gray-100 p-1 mb-3">
+            <button
+              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                tab === "profile"
+                  ? "bg-white text-gray-800 shadow-sm"
+                  : "text-gray-600 hover:text-gray-800"
+              }`}
+              onClick={() => setTab("profile")}
+            >
+              <FiUser className="w-4 h-4" />
+              Profile
+            </button>
+            <button
+              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                tab === "projects"
+                  ? "bg-white text-gray-800 shadow-sm"
+                  : "text-gray-600 hover:text-gray-800"
+              }`}
+              onClick={() => setTab("projects")}
+            >
+              <FiFolder className="w-4 h-4" />
+              Projects
+            </button>
           </div>
-            <div className="flex items-center gap-2">
-              <div className="relative flex-1">
-                <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input
-                  className="pl-19 pr-4 w-full border border-gray-300 rounded-lg outline-none transition"
-                  type="text"
-                  placeholder="GitHub username"
-                  style={{paddingLeft: "30px"}}
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <button
-                className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 active:bg-gray-900 font-medium flex items-center gap-2 transition"
-                onClick={() => fetchGitHubUser(username)}
-              >
-                Load
-              </button>
-            </div>
+
+          {/* Search Input */}
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="relative flex-1">
+            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              className="pl-19 pr-4 w-full border border-gray-300 rounded-lg outline-none transition"
+              type="text"
+              placeholder="GitHub username"
+              style={{ paddingLeft: "30px" }}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <button
+            className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 active:bg-gray-900 font-medium flex items-center gap-2 transition"
+            onClick={() => fetchGitHubUser(username)}
+          >
+            Load
+          </button>
+        </div>
       </div>
 
       {/* Body */}
@@ -159,25 +174,26 @@ export default function GitHubProjects() {
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
                   <FaGithub className="w-8 h-8 text-gray-400" />
                 </div>
-                <p className="text-gray-500">
-                  {error || "Enter a GitHub username and click Load to see profile"}
+                <p>
+                  {error ||
+                    "Enter a GitHub username and click Load to see profile"}
                 </p>
               </div>
             )}
-            
+
             {profile && (
               <div className="space-y-6">
                 {/* Profile Header */}
-                <div className="flex items-start gap-4">
-                  <img 
-                    src={profile.avatar_url} 
+                <div className="flex items-start gap-4 pt-2">
+                  <img
+                    src={profile.avatar_url}
                     alt={`${profile.login}'s avatar`}
                     className="w-20 h-20 rounded-xl border-2 border-gray-200 shadow-sm"
                   />
                   <div className="flex-1">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 className="text-xl font-bold text-gray-800">
+                        <h3 className="text-xl font-bold ">
                           {profile.name || profile.login}
                         </h3>
                       </div>
@@ -193,34 +209,34 @@ export default function GitHubProjects() {
                     </div>
                   </div>
                 </div>
-                        <p className="text-gray-600 mt-1">{profile.bio}</p>
-                    
-                    <div className="flex flex-wrap gap-4 mt-4">
-                      <div className="flex items-center gap-2 text-sm">
-                        <div className="font-semibold text-gray-700">{profile.followers}</div>
-                        <span className="text-gray-500">Followers</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm">
-                        <div className="font-semibold text-gray-700">{profile.following}</div>
-                        <span className="text-gray-500">Following</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm">
-                        <div className="font-semibold text-gray-700">{profile.public_repos}</div>
-                        <span className="text-gray-500">Repositories</span>
-                      </div>
-                    </div>
+                <p className=" mt-1">{profile.bio}</p>
+
+                <div className="flex flex-wrap gap-4 mt-4">
+                  <div className="flex items-center gap-2 text-sm">
+                    <div className="font-semibold">{profile.followers}</div>
+                    <span>Followers</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <div className="font-semibold">{profile.following}</div>
+                    <span>Following</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <div className="font-semibold">{profile.public_repos}</div>
+                    <span>Repositories</span>
+                  </div>
+                </div>
 
                 {/* Repositories Section */}
                 <div className="border-t border-gray-200 pt-2">
-                  <h4 className="text-lg font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                  <h4 className="text-lg font-semibold mb-2 flex items-center gap-2">
                     <FiFolder className="w-5 h-5" />
                     Recent Repositories
                   </h4>
-                  
+
                   <div className="space-y-3 max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-current">
                     {repos.slice(0, 10).map((r) => (
-                      <div 
-                        key={r.id} 
+                      <div
+                        key={r.id}
                         className="group px-2 py-4 border border-gray-200 rounded-xl hover:border-gray-300 hover:shadow-sm transition-all"
                       >
                         <div className="flex items-start justify-between">
@@ -230,17 +246,21 @@ export default function GitHubProjects() {
                                 href={r.html_url}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="font-semibold text-gray-800 hover:text-blue-600 truncate transition"
+                                className="font-semibold  hover:text-blue-600 truncate transition"
                               >
                                 {r.name}
                               </a>
                               {r.private && (
-                                <span className="px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded">Private</span>
+                                <span className="px-2 py-0.5 text-xs bg-gray-100  rounded">
+                                  Private
+                                </span>
                               )}
                             </div>
-                            <p className="text-gray-600 text-sm line-clamp-2 mb-3">{r.description}</p>
-                            
-                            <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                            <p className=" text-sm line-clamp-2 mb-3">
+                              {r.description}
+                            </p>
+
+                            <div className="flex flex-wrap gap-4 text-sm ">
                               <div className="flex items-center gap-1">
                                 <FiStar className="w-4 h-4" />
                                 <span>{r.stargazers_count}</span>
@@ -278,26 +298,26 @@ export default function GitHubProjects() {
         {tab === "projects" && (
           <div className="space-y-6">
             {/* Add Project Form */}
-            <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
-              <h4 className="font-medium text-gray-700 mb-3 flex items-center gap-2">
+            <div className="">
+              <h4 className="font-medium mb-3 flex items-center gap-2 pt-2">
                 <FiPlus className="w-4 h-4" />
                 Add New Project
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="">
                 <input
-                  className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                  className="px-4 py-2.5 border border-gray-300 rounded-lg outline-none transition mb-2"
                   placeholder="Project title *"
                   value={projTitle}
                   onChange={(e) => setProjTitle(e.target.value)}
                 />
                 <input
-                  className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                  className="px-4 py-2.5 border border-gray-300 rounded-lg mb-2 outline-none transition"
                   placeholder="GitHub repo URL (optional)"
                   value={projLink}
                   onChange={(e) => setProjLink(e.target.value)}
                 />
                 <button
-                  className="px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 font-medium flex items-center justify-center gap-2 transition disabled:opacity-50"
+                  className="px-4 py-2.5 btn rounded-lg hover:bg-blue-700 active:bg-blue-800 font-medium flex items-center justify-center gap-2 transition disabled:opacity-50"
                   onClick={addProject}
                   disabled={!projTitle}
                 >
@@ -309,14 +329,16 @@ export default function GitHubProjects() {
 
             {/* Projects List */}
             <div>
-              <h4 className="text-lg font-semibold text-gray-800 mb-4">
+              <h4 className="text-lg font-semibold  mb-4">
                 My Projects ({projects.length})
               </h4>
-              
+
               {projects.length === 0 ? (
-                <div className="text-center py-8 border-2 border-dashed border-gray-300 rounded-xl">
+                <div className="text-center py-8 border-2 border-dashed border-gray-300 rounded-xl mb-3">
                   <FiFolder className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                  <p className="text-gray-500">No projects yet. Add your first project above!</p>
+                  <p className="text-gray-500">
+                    No projects yet. Add your first project above!
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-3 max-h-80 overflow-y-auto pr-2">
@@ -332,9 +354,13 @@ export default function GitHubProjects() {
                       <div className="flex items-center justify-between">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-3 mb-1">
-                            <h5 className={`font-medium truncate ${
-                              p.done ? "text-green-700 line-through" : "text-gray-800"
-                            }`}>
+                            <h5
+                              className={`font-medium truncate ${
+                                p.done
+                                  ? "text-green-700 line-through"
+                                  : "text-gray-800"
+                              }`}
+                            >
                               {p.title}
                             </h5>
                             {p.done && (
@@ -343,7 +369,7 @@ export default function GitHubProjects() {
                               </span>
                             )}
                           </div>
-                          
+
                           {p.link && (
                             <a
                               href={p.link}
@@ -356,7 +382,7 @@ export default function GitHubProjects() {
                             </a>
                           )}
                         </div>
-                        
+
                         <div className="flex items-center gap-2 ml-4">
                           <button
                             onClick={() => toggleDone(idx)}
