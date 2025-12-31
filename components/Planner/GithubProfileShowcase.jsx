@@ -148,10 +148,11 @@ export default function GitHubProjects() {
           <div className="relative flex-1">
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
-              className="pl-19 pr-4 w-full border border-gray-300 rounded-lg outline-none transition"
+              className="pl-19 pr-4 w-full border border-gray-300 rounded-lg outline-none transition "
               type="text"
+
               placeholder="GitHub username"
-              style={{ paddingLeft: "30px" }}
+              style={{ paddingLeft: "30px" }}}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -305,13 +306,13 @@ export default function GitHubProjects() {
               </h4>
               <div className="">
                 <input
-                  className="px-4 py-2.5 border border-gray-300 rounded-lg outline-none transition mb-2"
+                  className="px-4 py-2.5 border border-gray-300 rounded-lg outline-none transition mb-2 w-full"
                   placeholder="Project title *"
                   value={projTitle}
                   onChange={(e) => setProjTitle(e.target.value)}
                 />
                 <input
-                  className="px-4 py-2.5 border border-gray-300 rounded-lg mb-2 outline-none transition"
+                  className="px-4 py-2.5 border border-gray-300 rounded-lg mb-2 outline-none transition w-full"
                   placeholder="GitHub repo URL (optional)"
                   value={projLink}
                   onChange={(e) => setProjLink(e.target.value)}

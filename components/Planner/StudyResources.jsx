@@ -296,7 +296,7 @@ export default function StudyResources() {
         </div>
 
         {resources.length === 0 && (
-          <div className="flex flex-col items-center justify-center text-center p-10 text-[var(--muted)] border-2 border-dashed border-[var(--border)] rounded-xl mt-3 bg-[var(--brand)]">
+          <div className="flex flex-col items-center justify-center text-center p-10 text-[var(--muted)] border-2 border-dashed border-[var(--border)] rounded-xl mt-3">
             <div className="text-5xl mb-4 opacity-70"></div>
             <div className="text-[15px] font-medium mb-2">
               No study resources yet
