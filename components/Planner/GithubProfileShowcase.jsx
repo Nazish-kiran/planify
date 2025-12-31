@@ -377,7 +377,7 @@ export default function GitHubProjects() {
                               rel="noreferrer"
                               className="inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-800 transition truncate"
                             >
-                              <FaGithub className="w-4 h-4 flex-shrink-0" />
+                              <FaGithub className="w-4 h-4 shrink-0" />
                               <span className="truncate">{p.link}</span>
                             </a>
                           )}
