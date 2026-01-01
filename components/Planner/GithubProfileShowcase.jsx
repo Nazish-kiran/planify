@@ -299,20 +299,20 @@ export default function GitHubProjects() {
         {tab === "projects" && (
           <div className="space-y-6">
             {/* Add Project Form */}
-            <div className="">
+            <div >
               <h4 className="font-medium mb-3 flex items-center gap-2 pt-2">
                 <FiPlus className="w-4 h-4" />
                 Add New Project
               </h4>
-              <div className="">
+              <div>
                 <input
-                  className="px-4 py-2.5 border border-gray-300 rounded-lg outline-none transition mb-2 w-full"
+                  className="px-4 py-2.5 border border-gray-300 rounded-lg outline-none  mb-2 w-full"
                   placeholder="Project title *"
                   value={projTitle}
                   onChange={(e) => setProjTitle(e.target.value)}
                 />
                 <input
-                  className="px-4 py-2.5 border border-gray-300 rounded-lg mb-2 outline-none transition w-full"
+                  className="px-4 py-2.5 border border-gray-300 rounded-lg mb-2 outline-none w-full"
                   placeholder="GitHub repo URL (optional)"
                   value={projLink}
                   onChange={(e) => setProjLink(e.target.value)}
