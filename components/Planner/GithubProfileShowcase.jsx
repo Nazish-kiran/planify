@@ -152,7 +152,7 @@ export default function GitHubProjects() {
               type="text"
 
               placeholder="GitHub username"
-              style={{ paddingLeft: "30px" }}}
+              style={{ paddingLeft: "30px" }}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
