@@ -149,10 +149,11 @@ export default function GitHubProjects() {
               <div className="p-4 px-0 pt-2 border-t border-gray-200">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="relative flex-1">
-                    <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <FiSearch className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input
-                      className="pl-10 pr-4 w-full border border-gray-300 rounded-lg outline-none transition "
+                      className=" pr-4 w-full border border-gray-300 rounded-lg outline-none transition "
                       type="text"
+                      style={{paddingLeft:'24px'}}
                       placeholder="GitHub username"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
