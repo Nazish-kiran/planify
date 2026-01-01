@@ -307,9 +307,9 @@ export default function GitHubProjects() {
                 <span className="font-medium">My Projects ({projects.length})</span>
               </div>
               {activeTab === "projects" ? (
-                <FiChevronUp className="w-5 h-5 text-gray-500" />
+                <FiChevronUp className="w-5 h-5 " />
               ) : (
-                <FiChevronDown className="w-5 h-5 text-gray-500" />
+                <FiChevronDown className="w-5 h-5 " />
               )}
             </button>
             
