@@ -1,4 +1,11 @@
+/* globals.css */
+:root {
+  --font-manrope: 'Manrope', sans-serif;
+}
 
+body {
+  font-family: var(--font-manrope), sans-serif;
+}
 .primary-btn {
   background-size: 200% auto;
   transition: all 0.4s ease-in-out;

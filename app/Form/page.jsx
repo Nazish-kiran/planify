@@ -91,7 +91,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
     }));
   }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#060606] font-[manrope] text-white p-6">
+    <div className="min-h-screen flex items-center justify-center bg-[#060606]   text-white p-6">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-3xl bg-white/5 backdrop-blur-sm border border-white/5 rounded-2xl p-8 shadow-2xl"

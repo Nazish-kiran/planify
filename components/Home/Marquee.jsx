@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const Marquee = () => {
   return (
     <div
-      className=" font-[manrope] rounded-2xl overflow-hidden relative py-13 mx-30 "
+      className="   rounded-2xl overflow-hidden relative py-13 mx-30 "
 
     >
       <motion.div

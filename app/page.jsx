@@ -10,6 +10,7 @@ import Navbar from "@/components/Home/Navbar";
 import DividerBtn from "@/components/ui/DividerBtn";
 import StatsCard from "@/components/Home/StatsCard";
 
+
 export default function Home() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false });
@@ -84,7 +85,7 @@ export default function Home() {
     return (
       <p
         ref={ref}
-        className="text-5xl leading-13.75 font-light font-[manrope] text-center mb-5 text-white"
+        className="text-5xl leading-13.75 font-light   text-center mb-5 text-white"
       >
         {text.split(" ").map((word, index) => (
           <motion.span key={index} custom={index} animate={controls}>
@@ -97,7 +98,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-[#060606] text-white font-[manrope]">
+      <div className="bg-[#060606] text-white  ">
         <Head>
           <title>PLANZIO AI - Plan Your Life with AI</title>
           <meta
@@ -118,13 +119,13 @@ export default function Home() {
           }}
         >
           <div className="max-w-3xl m-auto">
-            <h1 className="m-auto text-7xl text-center font-semibold leading-15 mb-5 font-[manrope]">
+            <h1 className="m-auto text-7xl text-center font-semibold leading-15 mb-5  ">
               Plan Your Life with{" "}
               <span className=" bg-gradient-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] bg-clip-text text-transparent">
                 AI-Powered Planners
               </span>
             </h1>
-            <p className="text-md text-center mb-10 text-[#a7aabb] font-[manrope]">
+            <p className="text-md text-center mb-10 text-[#a7aabb]  ">
               Turn your goals, routines, and ambitions into actionable plans
               with AI. Whether it&apos;s studies, business, or personal growth —
               Planify helps you stay ahead.
@@ -132,19 +133,19 @@ export default function Home() {
             <div className="flex gap-6 justify-center">
               <Link
                 href="#"
-                className="secondary-btn relative border-[#A93E17] border rounded-[100px] font-semibold px-8  py-3 font-[manrope] bg-black"
+                className="secondary-btn relative border-[#A93E17] border rounded-[100px] font-semibold px-8  py-3   bg-black"
               >
                 Get Started - Free
               </Link>
               <Link
                 href="#"
-                className="primary-btn bg-linear-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] font-semibold px-6 py-3 font-[manrope] rounded-[100px]"
+                className="primary-btn bg-linear-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] font-semibold px-6 py-3   rounded-[100px]"
               >
                 View Pricing
               </Link>
             </div>
           </div>
-          <h4 className="text-center font-[manrope] mt-20 text-xl text-[#a7aabb]">
+          <h4 className="text-center   mt-20 text-xl text-[#a7aabb]">
             Lastest Updates From{" "}
             <span className=" text-[#A93E17]  "> Planzio</span>{" "}
           </h4>

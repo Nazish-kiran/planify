@@ -50,7 +50,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <Link
             href="/features"
-            className="primary-btn hidden lg:block bg-black bg-linear-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] font-semibold px-6 py-3 font-[manrope] rounded-[100px]  "
+            className="primary-btn hidden lg:block bg-black bg-linear-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] font-semibold px-6 py-3   rounded-[100px]  "
           >
             Get Started
           </Link>
