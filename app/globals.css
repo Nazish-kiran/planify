@@ -1,2 +1,12 @@
 @import "tailwindcss";
 
+
+/* Smooth scrolling for the whole app */
+:root {
+	scroll-behavior: smooth;
+}
+
+.contrib-box {
+	scroll-snap-align: start;
+}
+

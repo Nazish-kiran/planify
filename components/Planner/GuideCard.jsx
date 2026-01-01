@@ -35,12 +35,12 @@ export default function ScheduleInfoModal({ open, onClose }) {
       onClick={onClose}
     >
       <div
-        className="bg-white w-full max-w-xl rounded-xl p-6 max-h-[80vh] overflow-y-auto shadow-lg"
+        className="btn w-full max-w-xl rounded-xl p-6 max-h-[80vh] overflow-y-auto shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">How it schedules your days</h2>
+          <h1 className="text-lg font-semibold">How it schedules your days</h1>
           <button onClick={onClose} className="text-xl">
             ✕
           </button>
@@ -95,9 +95,9 @@ export default function ScheduleInfoModal({ open, onClose }) {
                   </li>
                 ))}
               </ol>
-              <small className="block mt-3 text-gray-500">
+              <p className="block mt-3 text-sm">
                 You can tweak curriculum or phase text later.
-              </small>
+              </p>
             </div>
           )}
         </div>
