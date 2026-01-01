@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Header from "@/components/Layout/Header";
 import Sidebar from "@/components/Layout/Sidebar";
 import Calendar from "@/components/Planner/Calender";
@@ -24,9 +24,9 @@ export default function Home() {
     dayProgress: {},
   });
 
-  const handleProgressUpdate = (progress) => {
+  const handleProgressUpdate = useCallback((progress) => {
     setProgressData(progress);
-  };
+  }, []);
 
   return (
     <div className="app">

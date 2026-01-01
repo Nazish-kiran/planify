@@ -1,9 +1,10 @@
 "use client";
+import { memo } from "react";
 
-export default function StatsCard({ title, number, iconSrc, bottomImageSrc }) {
+const StatsCard = memo(function StatsCard({ title, number, iconSrc, bottomImageSrc }) {
   return (
     <div className="w-full sm:w-1/2 lg:w-1/4 px-3 group">
-      <div className="border border-[#FFFFFF0F] rounded-[20px] p-7 bg-[#0A0A0A] min-h-[320px] flex flex-col justify-between">
+      <div className="border border-[#FFFFFF0F] rounded-[20px] p-7 bg-[#0A0A0A] min-h-80 flex flex-col justify-between">
         {/* Top section */}
         <div>
           <div className="flex justify-between items-center">
@@ -20,9 +21,11 @@ export default function StatsCard({ title, number, iconSrc, bottomImageSrc }) {
 
         {/* Bottom image */}
         <div>
-          <img src={bottomImageSrc} alt={title + " illustration"} className="max-h-[80px]" />
+          <img src={bottomImageSrc} alt={title + " illustration"} className="max-h-20" />
         </div>
       </div>
     </div>
   );
-}
+});
+
+export default StatsCard;

@@ -84,7 +84,7 @@ export default function Home() {
     return (
       <p
         ref={ref}
-        className="text-5xl leading-[55px] font-light font-[manrope] text-center mb-5 text-white"
+        className="text-5xl leading-13.75 font-light font-[manrope] text-center mb-5 text-white"
       >
         {text.split(" ").map((word, index) => (
           <motion.span key={index} custom={index} animate={controls}>
@@ -118,7 +118,7 @@ export default function Home() {
           }}
         >
           <div className="max-w-3xl m-auto">
-            <h1 className="m-auto text-7xl text-center font-[600] leading-[60px] mb-5 font-[manrope]">
+            <h1 className="m-auto text-7xl text-center font-semibold leading-15 mb-5 font-[manrope]">
               Plan Your Life with{" "}
               <span className=" bg-gradient-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] bg-clip-text text-transparent">
                 AI-Powered Planners
@@ -132,13 +132,13 @@ export default function Home() {
             <div className="flex gap-6 justify-center">
               <Link
                 href="#"
-                className="secondary-btn relative border-[#A93E17] border-1 rounded-[100px] font-semibold px-8  py-3 font-[manrope] bg-black"
+                className="secondary-btn relative border-[#A93E17] border rounded-[100px] font-semibold px-8  py-3 font-[manrope] bg-black"
               >
                 Get Started - Free
               </Link>
               <Link
                 href="#"
-                className="primary-btn bg-gradient-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] font-semibold px-6 py-3 font-[manrope] rounded-[100px]"
+                className="primary-btn bg-linear-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] font-semibold px-6 py-3 font-[manrope] rounded-[100px]"
               >
                 View Pricing
               </Link>
@@ -227,7 +227,7 @@ export default function Home() {
         <section className="py-24 bg-black/30">
           <h2 className="text-4xl text-center mb-16 text-gradient relative">
             How It Works
-            <span className="absolute bottom-[-15px] left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"></span>
+            <span className="absolute -bottom-3.75 left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-linear-to-r from-transparent via-white to-transparent"></span>
           </h2>
 
           {[
@@ -278,14 +278,14 @@ export default function Home() {
               <div className="flex-1">
                 <h3 className="text-2xl mb-5 text-white relative pl-5">
                   {stepData.step}
-                  <span className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-gradient-to-b from-[#ff6a00] to-[#007bff] rounded"></span>
+                  <span className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-linear-to-b from-[#ff6a00] to-[#007bff] rounded"></span>
                 </h3>
                 <p className="text-lg leading-relaxed text-white/90 relative pl-5">
                   {stepData.description}
                 </p>
               </div>
               <div className="flex-1 p-5 relative">
-                <div className="absolute top-1/2 right-[-30px] transform -translate-y-1/2 w-0.5 h-3/4 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+                <div className="absolute top-1/2 -right-7.5 transform -translate-y-1/2 w-0.5 h-3/4 bg-linear-to-b from-transparent via-white/20 to-transparent"></div>
                 <img
                   src={stepData.image}
                   alt={stepData.step}

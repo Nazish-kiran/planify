@@ -216,7 +216,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
               onChange={handleChange}
               rows={3}
               placeholder="E.g., Learn React + Next.js, basics of SEO"
-              className="mt-2 w-full rounded-lg px-3 py-2 bg-white/6 border border-white/10 resize-y focus:outline-none focus:ring-2 focus:ring-white/20 min-h-[80px]"
+              className="mt-2 w-full rounded-lg px-3 py-2 bg-white/6 border border-white/10 resize-y focus:outline-none focus:ring-2 focus:ring-white/20 min-h-20"
             ></textarea>
             {errors.learningGoals && (
               <p className="text-xs text-rose-400 mt-1">
@@ -233,7 +233,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
               onChange={handleChange}
               rows={3}
               placeholder="E.g., Build 3 projects, take an SEO course, publish articles"
-              className="mt-2 w-full rounded-lg px-3 py-2 bg-white/6 border border-white/10 resize-y focus:outline-none focus:ring-2 focus:ring-white/20 min-h-[80px]"
+              className="mt-2 w-full rounded-lg px-3 py-2 bg-white/6 border border-white/10 resize-y focus:outline-none focus:ring-2 focus:ring-white/20 min-h-20"
             ></textarea>
             {errors.actionPlans && (
               <p className="text-xs text-rose-400 mt-1">{errors.actionPlans}</p>
@@ -248,7 +248,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
               onChange={handleChange}
               rows={3}
               placeholder="E.g., Personal portfolio site, blog, e-commerce MVP"
-              className="mt-2 w-full rounded-lg px-3 py-2 bg-white/6 border border-white/10 resize-y focus:outline-none focus:ring-2 focus:ring-white/20 min-h-[80px]"
+              className="mt-2 w-full rounded-lg px-3 py-2 bg-white/6 border border-white/10 resize-y focus:outline-none focus:ring-2 focus:ring-white/20 min-h-20"
             ></textarea>
             {errors.buildingProjects && (
               <p className="text-xs text-rose-400 mt-1">
@@ -265,7 +265,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
               onChange={handleChange}
               rows={2}
               placeholder="E.g., 5 focused hours/day, automate backups"
-              className="mt-2 w-full rounded-lg px-3 py-2 bg-white/6 border border-white/10 resize-y focus:outline-none focus:ring-2 focus:ring-white/20 min-h-[80px]"
+              className="mt-2 w-full rounded-lg px-3 py-2 bg-white/6 border border-white/10 resize-y focus:outline-none focus:ring-2 focus:ring-white/20 min-h-20"
             ></textarea>
             {errors.productivityGoals && (
               <p className="text-xs text-rose-400 mt-1">

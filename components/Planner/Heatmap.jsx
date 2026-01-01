@@ -1,13 +1,77 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 
-// Helper functions
+const LS_KEY = "bmi_5y_planner_state_v1";
+
+// Memoized constants - only created once
+const WEEK_RHYTHM = {
+  1: "Coding & Automation",
+  2: "Marketing & Content",
+  3: "Coding & Automation",
+  4: "Marketing & Content",
+  5: "Coding & Automation",
+  6: "BMI Ops Project",
+  0: "Strategy / Review",
+};
+
+const CURRICULUM = {
+  "Coding & Automation": [
+    "Python: data types, loops, functions",
+    "Python: files, JSON, error handling",
+    "SQL: SELECT/JOIN/AGG",
+    "Pandas basics for analysis",
+    "Flask/Django: CRUD app",
+    "Auth & roles (admin/distributor)",
+    "REST APIs for inventory",
+    "React basics (components/state)",
+    "Next.js pages & API routes",
+    "Deploy to Vercel/Render",
+    "Data viz (charts/dashboards)",
+    "Automation: Excel/CSV pipelines",
+  ],
+  "Marketing & Content": [
+    "SEO basics: keywords & intent",
+    "On-page SEO: titles/meta/alt",
+    "Content calendar for BMI",
+    "Facebook/IG ads fundamentals",
+    "Google Ads basics",
+    "Landing page copywriting",
+    "Email CRM (segmentation)",
+    "LinkedIn outreach (B2B)",
+    "Competitor teardown (5 brands)",
+    "Photography standards for SKUs",
+    "Short-form video workflow",
+    "Analytics (GA4, Meta)",
+  ],
+  "BMI Ops Project": [
+    "Catalog: 92 SKUs × sizes × colors (audit)",
+    "Map distributors by region",
+    "Hospital/clinic leads list",
+    "Website IA + wireframes",
+    "Set packaging/labeling guidelines",
+    "Prepare ISO documentation packet",
+    "B2B order form requirements",
+    "Calculate pricing & margin sheets",
+    "Logistics & delivery SLAs",
+    "CSR & partnerships plan",
+    "Sports physio pilot program",
+    "Quarterly board review deck",
+  ],
+  "Strategy / Review": [
+    "Weekly review: wins/blockers",
+    "Read: The Prince / Art of War",
+    "Read: Blue Ocean / Lean Startup",
+    "Roadmap adjust: next sprint",
+    "Finance check: P&L snapshot",
+    "Product ideas backlog grooming",
+    "Rest & recovery / family",
+  ],
+};
+
 const isoDate = (d) => {
   const dt = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
   return dt.toISOString().slice(0, 10);
 };
-
-const LS_KEY = "bmi_5y_planner_state_v1";
 
 export default function Heatmap() {
   const [viewMode, setViewMode] = useState("current");
@@ -20,89 +84,37 @@ export default function Heatmap() {
   const tooltipRef = useRef(null);
   const heatmapGraphRef = useRef(null);
   const monthsRowRef = useRef(null);
+  const storageCache = useRef(null);
+  const lastUpdateTime = useRef(0);
 
   // Constants
   const YEARS = 5;
   const MS_DAY = 24 * 60 * 60 * 1000;
-  const START_DATE = new Date();
-  START_DATE.setHours(0, 0, 0, 0);
+  const START_DATE = useMemo(() => {
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }, []);
 
-  const WEEK_RHYTHM = {
-    1: "Coding & Automation",
-    2: "Marketing & Content",
-    3: "Coding & Automation",
-    4: "Marketing & Content",
-    5: "Coding & Automation",
-    6: "BMI Ops Project",
-    0: "Strategy / Review",
-  };
-
-  // Load state from localStorage
-  const loadState = () => {
+  // Load state from localStorage with caching
+  const loadState = useCallback(() => {
+    const now = Date.now();
+    if (storageCache.current && now - lastUpdateTime.current < 100) {
+      return storageCache.current;
+    }
     try {
       const raw = localStorage.getItem(LS_KEY);
-      return raw ? JSON.parse(raw) : { done: {}, custom: {} };
+      const state = raw ? JSON.parse(raw) : { done: {}, custom: {} };
+      storageCache.current = state;
+      lastUpdateTime.current = now;
+      return state;
     } catch {
       return { done: {}, custom: {} };
     }
-  };
+  }, []);
 
   // Task generation function
-  const buildTasksForDay = (date) => {
-    const CURRICULUM = {
-      "Coding & Automation": [
-        "Python: data types, loops, functions",
-        "Python: files, JSON, error handling",
-        "SQL: SELECT/JOIN/AGG",
-        "Pandas basics for analysis",
-        "Flask/Django: CRUD app",
-        "Auth & roles (admin/distributor)",
-        "REST APIs for inventory",
-        "React basics (components/state)",
-        "Next.js pages & API routes",
-        "Deploy to Vercel/Render",
-        "Data viz (charts/dashboards)",
-        "Automation: Excel/CSV pipelines",
-      ],
-      "Marketing & Content": [
-        "SEO basics: keywords & intent",
-        "On-page SEO: titles/meta/alt",
-        "Content calendar for BMI",
-        "Facebook/IG ads fundamentals",
-        "Google Ads basics",
-        "Landing page copywriting",
-        "Email CRM (segmentation)",
-        "LinkedIn outreach (B2B)",
-        "Competitor teardown (5 brands)",
-        "Photography standards for SKUs",
-        "Short-form video workflow",
-        "Analytics (GA4, Meta)",
-      ],
-      "BMI Ops Project": [
-        "Catalog: 92 SKUs × sizes × colors (audit)",
-        "Map distributors by region",
-        "Hospital/clinic leads list",
-        "Website IA + wireframes",
-        "Set packaging/labeling guidelines",
-        "Prepare ISO documentation packet",
-        "B2B order form requirements",
-        "Calculate pricing & margin sheets",
-        "Logistics & delivery SLAs",
-        "CSR & partnerships plan",
-        "Sports physio pilot program",
-        "Quarterly board review deck",
-      ],
-      "Strategy / Review": [
-        "Weekly review: wins/blockers",
-        "Read: The Prince / Art of War",
-        "Read: Blue Ocean / Lean Startup",
-        "Roadmap adjust: next sprint",
-        "Finance check: P&L snapshot",
-        "Product ideas backlog grooming",
-        "Rest & recovery / family",
-      ],
-    };
-
+  const buildTasksForDay = useCallback((date) => {
     const yearDiff = date.getFullYear() - START_DATE.getFullYear();
     const phaseIdx = Math.min(Math.max(0, yearDiff), 4);
     const track = WEEK_RHYTHM[date.getDay()];
@@ -137,7 +149,7 @@ export default function Heatmap() {
       id: `${idBase}-${i}`,
       text: t,
     }));
-  };
+  }, [START_DATE]);
 
   // Heatmap calculations
   const tasksCompletedOn = (date) => {
@@ -161,6 +173,60 @@ export default function Heatmap() {
     if (completed === 3) return 3;
     return 4;
   };
+
+  // Render functions
+  const renderMonths = (startDate, endDate) => {
+    if (!monthsRowRef.current) return;
+
+    monthsRowRef.current.innerHTML = "";
+    let currentDate = new Date(startDate);
+    let weekIndex = 0;
+    let lastMonth = -1;
+
+    while (currentDate <= endDate) {
+      if (currentDate.getDay() === 0) {
+        weekIndex++;
+
+        const endOfWeek = new Date(currentDate);
+        endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+        const month = endOfWeek <= endDate ? endOfWeek.getMonth() : currentDate.getMonth();
+
+        if (month !== lastMonth) {
+          const label = document.createElement("span");
+          label.classList.add("month-label");
+          label.style.gridColumn = weekIndex.toString();
+          label.textContent = new Date(
+            currentDate.getFullYear(),
+            month
+          ).toLocaleString("default", { month: "short" });
+          monthsRowRef.current.appendChild(label);
+          lastMonth = month;
+        }
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    } - memoized
+  const tasksCompletedOn = useCallback((date) => {
+    const STATE = loadState();
+    const key = isoDate(date);
+    return Object.values(STATE.done[key] || {}).filter(Boolean).length;
+  }, [loadState]);
+
+  const totalTasksOn = useCallback((date) => {
+    const STATE = loadState();
+    const key = isoDate(date);
+    const base = 4;
+    const custom = STATE.custom[key] || [];
+    return base + custom.length;
+  }, [loadState]);
+
+  const getActivityLevel = useCallback((completed, total) => {
+    if (completed === 0) return 0;
+    if (completed === 1) return 1;
+    if (completed === 2) return 2;
+    if (completed === 3) return 3;
+    return 4;
+  }, []);
 
   // Render functions
   const renderMonths = (startDate, endDate) => {
@@ -254,7 +320,6 @@ export default function Heatmap() {
     renderDays(startDate, endDate);
   };
 
-  // Event handlers
   const showTooltip = (event, date, completed) => {
     const formattedDate = date.toLocaleDateString("en-US", {
       weekday: "long",
@@ -362,9 +427,30 @@ export default function Heatmap() {
         hideTooltip();
       }
     };
-
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  // Listen for storage changes - REDUCED POLLING FROM 500ms TO 2s
+  useEffect(() => {
+    const handleStorageChange = () => {
+      storageCache.current = null;
+      setDataVersion(prev => prev + 1);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('localStorageChange', handleStorageChange);
+
+    // Reduced polling interval from 500ms to 2000ms for better performance
+    const interval = setInterval(() => {
+      handleStorageChange();
+    }, 2000);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('localStorageChange', handleStorageChange);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -380,25 +466,19 @@ export default function Heatmap() {
               onChange={handleViewModeChange}
             >
               <option value="current">Current Year</option>
-              <option value="all">All 5 Years</option>
+              <option value="full">Full 5-Year View</option>
             </select>
-          </div>
-        </div>
-        <div className="body">
-          {/* Year navigation for multi-year view */}
-          <div id="yearNavigation" className={viewMode === "all" ? "mb-4" : "hidden mb-4"}>
-            <div className="flex items-center justify-between">
+
+            <div className="pagination">
               <button 
                 id="prevYear" 
                 className="btn"
                 onClick={() => handleYearChange("prev")}
                 disabled={currentViewYear <= START_DATE.getFullYear()}
               >
-                <i className="fa-solid fa-chevron-left"></i> Previous Year
+                <i className="fa-solid fa-chevron-left"></i> Prev Year
               </button>
-              <span id="currentYearDisplay" className="font-semibold">
-                {currentViewYear}
-              </span>
+              <span className="year-label">{currentViewYear}</span>
               <button 
                 id="nextYear" 
                 className="btn"
@@ -542,4 +622,5 @@ export default function Heatmap() {
       )}
     </div>
   );
+}
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 
 const BACKEND_URL = "http://localhost:3001";
 
@@ -9,66 +9,68 @@ export default function Notes({ date }) {
   const [loading, setLoading] = useState(false);
   const textareaRef = useRef(null);
 
-  // Helper to ensure date is YYYY-MM-DD (LOCAL TIME)
-  const formatDate = (d) => {
-    if (!d) return new Date().toLocaleDateString('en-CA');
-    if (d instanceof Date) return d.toLocaleDateString('en-CA');
-    return d; // already a string in YYYY-MM-DD format
-  };
+  // Format date as YYYY-MM-DD (local)
+  const formattedDate = useMemo(() => {
+    if (!date) return new Date().toLocaleDateString("en-CA");
+    return date instanceof Date ? date.toLocaleDateString("en-CA") : date;
+  }, [date]);
 
-  const formattedDate = formatDate(date);
-
-  // Fetch notes when modal opens or date changes
-  useEffect(() => {
-    if (!formattedDate) return;
+  // Fetch notes
+  const fetchNotes = useCallback(async () => {
+    if (!formattedDate || !isModalOpen) return;
     setLoading(true);
-
-    fetch(`${BACKEND_URL}/notes?date=${formattedDate}`, {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setNotes(data?.note || "");
-      })
-      .catch(() => {
-        console.warn("Could not fetch notes");
-        setNotes("");
-      })
-      .finally(() => setLoading(false));
-  }, [formattedDate, isModalOpen]);
-
-  // Save notes to backend
-  const saveNotesToDB = async (text) => {
-    if (!formattedDate) return;
-
     try {
-      const res = await fetch(`${BACKEND_URL}/notes/save`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch(`${BACKEND_URL}/notes?date=${formattedDate}`, {
+        method: "GET",
         credentials: "include",
-        body: JSON.stringify({ content: text, date: formattedDate }),
       });
       const data = await res.json();
-      if (data.success) showNotification("Notes saved!");
-      else showNotification(data.error || "Failed to save notes.");
-    } catch (err) {
-      console.warn("Could not save notes", err);
-      showNotification("Server error while saving notes.");
+      setNotes(data?.note || "");
+    } catch {
+      console.warn("Could not fetch notes");
+      setNotes("");
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [formattedDate, isModalOpen]);
 
-  const handleSave = () => saveNotesToDB(notes);
+  useEffect(() => {
+    fetchNotes();
+  }, [fetchNotes]);
 
-  const handleClear = async () => {
+  // Save notes
+  const saveNotesToDB = useCallback(
+    async (text) => {
+      if (!formattedDate) return;
+      try {
+        const res = await fetch(`${BACKEND_URL}/notes/save`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ content: text, date: formattedDate }),
+        });
+        const data = await res.json();
+        if (data.success) showNotification("Notes saved!");
+        else showNotification(data.error || "Failed to save notes.");
+      } catch (err) {
+        console.warn("Could not save notes", err);
+        showNotification("Server error while saving notes.");
+      }
+    },
+    [formattedDate]
+  );
+
+  const handleSave = useCallback(() => saveNotesToDB(notes), [notes, saveNotesToDB]);
+
+  const handleClear = useCallback(async () => {
     if (!formattedDate) return;
     if (confirm("Clear all notes?")) {
       setNotes("");
       await saveNotesToDB("");
     }
-  };
+  }, [formattedDate, saveNotesToDB]);
 
-  // Close modal on Escape key
+  // Close modal on Escape
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape" && isModalOpen) setIsModalOpen(false);
@@ -124,20 +126,20 @@ export default function Notes({ date }) {
             <div className="flex justify-between p-4 border-t rounded-b-lg">
               <button
                 onClick={handleClear}
-                className="px-[12px] py-[8px] border border-red-500 rounded-[10px] text-red-500 font-medium cursor-pointer"
+                className="px-3 py-2 border border-red-500 rounded-[10px] text-red-500 font-medium cursor-pointer"
               >
                 Clear Notes
               </button>
               <div className="space-x-2">
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="px-[12px] py-[8px] text-gray-600 hover:text-gray-800 font-medium cursor-pointer"
+                  className="px-3 py-2 text-gray-600 hover:text-gray-800 font-medium cursor-pointer"
                 >
                   Close
                 </button>
                 <button
                   onClick={handleSave}
-                  className="px-[12px] py-[8px] bg-blue-600 text-white rounded-[10px] hover:bg-blue-700 font-medium cursor-pointer"
+                  className="px-3 py-2 bg-blue-600 text-white rounded-[10px] hover:bg-blue-700 font-medium cursor-pointer"
                 >
                   Save Notes
                 </button>
@@ -150,6 +152,7 @@ export default function Notes({ date }) {
   );
 }
 
+// Simple notification fallback
 function showNotification(message) {
   alert(message);
 }

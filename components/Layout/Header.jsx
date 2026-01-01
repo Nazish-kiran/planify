@@ -71,7 +71,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full flex items-center justify-between gap-[16px] mb-[16px]">
+    <header className="w-full flex items-center justify-between gap-4 mb-4">
       <div className="flex gap-3 items-center">
         <i
           className="fa-regular fa-calendar"

@@ -119,7 +119,7 @@ export default function GitHubProjects() {
           {/* Tabs */}
           <div className="flex rounded-lg bg-gray-100 p-1 mb-3">
             <button
-              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all cursor-pointer ${
                 tab === "profile"
                   ? "bg-white text-gray-800 shadow-sm"
                   : "text-gray-600 hover:text-gray-800"
@@ -130,7 +130,7 @@ export default function GitHubProjects() {
               Profile
             </button>
             <button
-              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all cursor-pointer ${
                 tab === "projects"
                   ? "bg-white text-gray-800 shadow-sm"
                   : "text-gray-600 hover:text-gray-800"
