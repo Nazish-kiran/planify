@@ -29,3 +29,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+// https://html.awaikenthemes.com/nextmind/ai-agency/index.html
