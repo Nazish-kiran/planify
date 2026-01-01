@@ -20,6 +20,7 @@ export default function Heatmap() {
   const tooltipRef = useRef(null);
   const heatmapGraphRef = useRef(null);
   const monthsRowRef = useRef(null);
+  const dayDetailsRef = useRef(null); // Ref for the day details section
 
   // Constants
   const YEARS = 5;
@@ -300,6 +301,16 @@ export default function Heatmap() {
       track: WEEK_RHYTHM[date.getDay()]
     });
     setDayDetailsOpen(true);
+    
+    // Scroll to day details after state update
+    setTimeout(() => {
+      if (dayDetailsRef.current) {
+        dayDetailsRef.current.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+    }, 100); // Small delay to ensure the component is rendered
   };
 
   const hideDayDetails = () => {
@@ -354,6 +365,17 @@ export default function Heatmap() {
   useEffect(() => {
     renderHeatmap();
   }, [viewMode, currentViewYear, dataVersion]);
+
+  // Scroll to day details when it opens
+  useEffect(() => {
+    if (dayDetailsOpen && dayDetailsRef.current) {
+      // Scroll to day details
+      dayDetailsRef.current.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+  }, [dayDetailsOpen]);
 
   // Close tooltip when clicking outside
   useEffect(() => {
@@ -444,9 +466,13 @@ export default function Heatmap() {
         </div>
       </div>
       
-      {/* Day Details Section */}
+      {/* Day Details Section - with ref */}
       {dayDetailsOpen && selectedDate && (
-        <div id="dayDetails" className="card Contribution mt-4">
+        <div 
+          id="dayDetails" 
+          className="card Contribution mt-4" 
+          ref={dayDetailsRef} // Add ref here
+        >
           <div className="head">
             <h2 id="dayDetailsTitle">
               {selectedDate.date.toLocaleDateString("en-US", {

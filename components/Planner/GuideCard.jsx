@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 export default function ScheduleInfoModal({ open, onClose }) {
   const [openAccordion, setOpenAccordion] = useState(null);
 
+
   const toggleAccordion = useCallback((key) => {
     setOpenAccordion((prev) => (prev === key ? null : key));
   }, []);
@@ -41,7 +42,7 @@ export default function ScheduleInfoModal({ open, onClose }) {
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-lg font-semibold">How it schedules your days</h1>
-          <button onClick={onClose} className="text-xl">
+          <button onClick={onClose} className="text-xl cursor-pointer">
             ✕
           </button>
         </div>
@@ -54,7 +55,7 @@ export default function ScheduleInfoModal({ open, onClose }) {
           >
             <span>Weekly rhythm</span>
             <i
-              className={`fas fa-chevron-down transition-transform duration-300 ${
+              className={`fas fa-chevron-down transition-transform duration-300 cursor-pointer ${
                 openAccordion === "weeklyRhythm" ? "rotate-180" : ""
               }`}
             ></i>
@@ -79,11 +80,11 @@ export default function ScheduleInfoModal({ open, onClose }) {
             onClick={() => toggleAccordion("phasesByYear")}
           >
             <span>Phases by year</span>
-            <span
-              className={`fas fa-chevron-down transition-transform duration-300 ${
+            <i
+              className={`fas fa-chevron-down transition-transform duration-300 cursor-pointer ${
                 openAccordion === "phasesByYear" ? "rotate-180" : ""
               }`}
-            ></span>
+            ></i>
           </button>
 
           {openAccordion === "phasesByYear" && (
