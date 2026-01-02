@@ -259,10 +259,10 @@ export default function Calendar({
                     className="row"
                     style={{ justifyContent: "space-between" }}
                   >
-                    <span>{day.label}</span>
+                    <span className="">{day.label}</span>
                     <span className="dnum">{day.day}</span>
                   </div>
-                  <span className="track">{day.track}</span>
+                  <p className="track text-center" style={{fontSize:"11px"}}>{day.track}</p>
                   <div className="bar">
                     <span style={{ width: `${day.progress}%` }} />
                   </div>
