@@ -1,28 +1,31 @@
 :root[data-theme="sunset"] {
-  --muted: #ff7e42;
-  --text: #ffd166;
-  --sub: #ffd166;
-  --brand: #df312d;
-  --ok: #2dd4bf;
-  --warn: #e1453b;
-  --border: #ff7e42;
-  --btn-border: #df312d;
-  --btn-hover-border: #f97316;
-  --btn-color: #fff8e7;
-  --btn-text: #7c2d12;
-  --dayCard-color: #7c2d12;
-  --track-text: #ffe8b3;
-  --num-color: #ffd97a;
+  --muted: #F29A2E;         /* Warm orange glow */
+  --text: #FFF3E0;          /* Soft warm white for readability */
+  --sub:#FFF3E0;           /* Softer orange for subtitles */
+  --brand: #FF5722;         /* Vibrant sunset orange-red */
+  --ok: #4CAF50;            /* Green kept for contrast */
+  --warn: #FF9800;          /* Bright warning orange */
+  --border: #E65100;        /* Deep orange border */
+  --btn-border: #D84315;    /* Rich orange-red */
+  --btn-hover-border: #FF8A65; /* Lighter orange on hover */
+  --btn-color: #FFF8E7;     /* Warm off-white */
+  --btn-text: #5D4037;      /* Warm brown text */
+  --dayCard-color: rgba(123, 31, 162, 0.15); /* Purple tint with transparency */
+  --track-text: #FFECB3;    /* Soft yellow text */
+  --num-color: #FFD54F;     /* Gold for numbers */
   --bg-gradient: radial-gradient(
-    circle at 50% 30%,
-    #ffb347 0%,
-    #ff7e42 30%,
-    #df312d 65%,
-    #431407 100%
+    ellipse at 50% 20%,
+    #FFEB3B 0%,             /* Sun yellow at horizon */
+    #FF9800 15%,            /* Bright orange */
+    #F29A2E 30%,            /* Your orange */
+    #E75A0A 45%,            /* Your deeper orange */
+    #D84315 60%,            /* Red-orange */
+    #AD2412 75%,            /* Your deep red */
+    #6A1B9A 90%,            /* Twilight purple */
+    #311B92 100%            /* Deep night blue */
   );
   --main-font: "Helvetica Now Display", "Georgia", serif;
 }
-
 [data-theme="sunset"] body {
   background: var(--bg-gradient);
   background-repeat: no-repeat;
