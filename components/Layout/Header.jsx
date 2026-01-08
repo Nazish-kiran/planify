@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { useTheme } from "../ui/ThemeProvider";
 import ThemeDropdown from "../ui/DropDown";
 import Notes from "../ui/Notes";
+import Stopwatch from "../Planner/StopWatch";
 
 export default function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -111,6 +112,7 @@ export default function Header() {
         </div>
 
         <div className="row row2">
+          <Stopwatch/>
           {/* User Icon */}
           <div className="w-11 h-11 rounded-full flex items-center justify-center bg-zinc-800 border border-[#3F3F46] text-gray-200 mr-3">
             <i className="fa-regular fa-user" aria-hidden="true"></i>
@@ -186,6 +188,7 @@ export default function Header() {
 
       {/* Desktop Header Controls */}
       <div className="row">
+          <Stopwatch/>
         <div className="w-11 h-11 rounded-full flex items-center justify-center bg-zinc-800 border border-[#3F3F46] text-gray-200 mr-3">
           <i className="fa-regular fa-user" aria-hidden="true"></i>
           <span className="sr-only">User</span>
