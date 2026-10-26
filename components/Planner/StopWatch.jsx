@@ -73,10 +73,7 @@ export default function StopwatchWrapper() {
               Pause
             </button>
 
-            <button
-              onClick={reset}
-              className="btn px-4 py-2 font-medium"
-            >
+            <button onClick={reset} className="btn px-4 py-2 font-medium">
               Reset
             </button>
 

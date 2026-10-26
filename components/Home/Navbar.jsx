@@ -49,7 +49,7 @@ const Navbar = () => {
         {/* Hamburger & Get Started */}
         <div className="flex items-center gap-4">
           <Link
-            href="/features"
+            href="/planner"
             className="primary-btn hidden lg:block bg-black bg-linear-to-r from-[#A93E17] via-[#15399A] to-[#A93E17] font-semibold px-6 py-3   rounded-[100px]  "
           >
             Get Started
